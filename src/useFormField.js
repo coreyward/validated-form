@@ -7,7 +7,6 @@ export const useFormField = ({
   name,
   defaultValue,
   required,
-  transformValue,
   validator,
   ...fieldProps
 }) => {
@@ -37,9 +36,7 @@ export const useFormField = ({
     errorMessage: field.error,
     onChange: handleInputChange,
     onBlur: handleInputBlur,
-    value: transformValue ? transformValue(field.value || "") : field.value,
-    name,
-    required,
+    value: field.value,
   }
 }
 
@@ -47,7 +44,6 @@ useFormField.propTypes = {
   name: PropTypes.string.isRequired,
   defaultValue: PropTypes.string,
   required: PropTypes.bool,
-  transformValue: PropTypes.func,
   validator: PropTypes.func,
 }
 
