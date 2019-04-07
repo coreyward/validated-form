@@ -89,14 +89,16 @@ export default class ValidatedForm extends React.Component {
       if (this.props.onSubmit) {
         event.preventDefault()
 
-        this.setState({
-          submitted: !!this.props.onSubmit({
+        Promise.resolve(
+          this.props.onSubmit({
             event,
             fields: this.state.fields,
             addError: this.addError,
             hasError: this.hasError,
             setField: this.setField,
-          }),
+          })
+        ).then(submitted => {
+          this.setState({ submitted })
         })
       }
     } else {
@@ -148,10 +150,11 @@ export default class ValidatedForm extends React.Component {
       handleInputBlur: this.handleInputBlur,
       hasError: this.hasError,
       addError: this.addError,
+      clearError: this.clearError,
+      validateField: this.validateField,
       setField: this.setField,
       addField: this.addField,
       removeField: this.removeField,
-      clearError: this.clearError,
       fields: this.state.fields,
     }
 
