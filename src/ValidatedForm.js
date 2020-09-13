@@ -143,7 +143,13 @@ export default class ValidatedForm extends React.Component {
       return this.renderSuccess()
     }
 
-    const { children } = this.props
+    const {
+      children,
+      onSubmit,
+      renderSuccess,
+      validateEmpty,
+      ...rest
+    } = this.props
     const context = {
       handleSubmit: this.handleSubmit,
       handleInputChange: this.handleInputChange,
@@ -160,7 +166,7 @@ export default class ValidatedForm extends React.Component {
 
     return (
       <FormContext.Provider value={context}>
-        <form method="POST" onSubmit={this.handleSubmit} noValidate>
+        <form method="POST" onSubmit={this.handleSubmit} noValidate {...rest}>
           {typeof children === "function" ? children(context) : children}
         </form>
       </FormContext.Provider>
