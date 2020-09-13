@@ -28,5 +28,8 @@
   "scripts": {
     "build": "yarn run webpack --mode=production",
     "prepublish": "yarn run build"
+  },
+  "resolutions": {
+    "chokidar": "^3.4.0"
   }
 }
